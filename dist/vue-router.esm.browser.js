@@ -1449,10 +1449,8 @@ function addRouteRecord (
     });
   }
 
-  if (!pathMap[record.path]) {
-    pathList.push(record.path);
-    pathMap[record.path] = record;
-  }
+  pathList.push(record.path);
+  pathMap[record.path] = record;
 
   if (route.alias !== undefined) {
     const aliases = Array.isArray(route.alias) ? route.alias : [route.alias];
@@ -1483,9 +1481,8 @@ function addRouteRecord (
   }
 
   if (name) {
-    if (!nameMap[name]) {
-      nameMap[name] = record;
-    } else if (!matchAs) {
+    nameMap[name] = record;
+    if (!nameMap[name] && "development" !== 'production' && !matchAs) {
       warn(
         false,
         `Duplicate named routes definition: ` +
@@ -3117,4 +3114,4 @@ if (inBrowser && window.Vue) {
   window.Vue.use(VueRouter);
 }
 
-export default VueRouter;
+export { VueRouter as default };
